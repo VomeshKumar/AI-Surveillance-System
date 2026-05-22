@@ -1,0 +1,9 @@
+-r base.txt
+psycopg2-binary>=2.9.9
+pgvector>=0.3.0
+alembic>=1.13.1
+opencv-python-headless>=4.10.0.84
+numpy>=1.26.4
+onnxruntime>=1.18.0
+faiss-cpu>=1.8.0
+scipy>=1.13.0

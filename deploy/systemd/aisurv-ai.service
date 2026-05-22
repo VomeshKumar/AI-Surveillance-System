@@ -1,0 +1,15 @@
+[Unit]
+Description=AI Surveillance Inference Service
+After=network.target
+
+[Service]
+User=aisurv
+WorkingDirectory=/opt/aisurv/backend
+ExecStart=/opt/aisurv/venv/bin/python -m app.ai.service_runner
+Restart=always
+RestartSec=5
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
+

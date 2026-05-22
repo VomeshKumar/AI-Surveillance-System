@@ -1,0 +1,15 @@
+[Unit]
+Description=AI Surveillance API
+After=network.target postgresql.service redis.service
+
+[Service]
+User=aisurv
+WorkingDirectory=/opt/aisurv/backend
+ExecStart=/opt/aisurv/venv/bin/gunicorn main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 127.0.0.1:8000 --timeout 120 --keep-alive 5
+Restart=always
+RestartSec=5
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
+

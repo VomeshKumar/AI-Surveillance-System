@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "ai-surveillance-engine"
+version = "0.1.0"
+description = "High-performance AI Surveillance Engine with multi-process architecture"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "app"}]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.13"
+fastapi = "^0.111.0"
+uvicorn = {extras = ["standard"], version = "^0.30.1"}
+sqlalchemy = "^2.0.30"
+psycopg2-binary = "^2.9.9"
+pgvector = "^0.3.0"
+alembic = "^1.13.1"
+opencv-python-headless = "^4.10.0.84"
+redis = "^5.0.4"
+pydantic = "^2.7.1"
+pydantic-settings = "^2.2.1"
+numpy = "^1.26.4"
+onnxruntime = "^1.18.0"
+faiss-cpu = "^1.8.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

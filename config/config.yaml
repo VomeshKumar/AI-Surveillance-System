@@ -1,0 +1,41 @@
+# AI Surveillance System Orchestrator Config
+
+database:
+  redis_url: "redis://127.0.0.1:6379/0"
+  postgres_url: "postgresql://postgres:admin123@127.0.0.1:5432/ai_surveillance"
+
+services:
+  engine:
+    name: "ENGINE"
+    color: "blue"
+    directory: "services/ai-engine"
+    command: ["..\\..\\.venv\\Scripts\\python.exe", "run_all.py"]
+    host: "127.0.0.1"
+    port: 8000
+    retries: 3
+    
+  consumer:
+    name: "CONSUMER"
+    color: "magenta"
+    directory: "services/dashboard-api"
+    command: ["..\\..\\.venv\\Scripts\\python.exe", "-m", "app.consumers.runner"]
+    retries: 3
+    
+  backend:
+    name: "API"
+    color: "green"
+    directory: "services/dashboard-api"
+    # Note: On Windows, Gunicorn is not supported, so using Uvicorn
+    command: ["..\\..\\.venv\\Scripts\\python.exe", "main.py"]
+    host: "127.0.0.1"
+    port: 8001
+    retries: 3
+    
+  frontend:
+    name: "FRONTEND"
+    color: "cyan"
+    directory: "services/dashboard-ui"
+    command: ["npm.cmd", "run", "dev"]
+    host: "127.0.0.1"
+    port: 5173
+    retries: 3

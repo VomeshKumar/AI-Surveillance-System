@@ -1,0 +1,61 @@
+name: AI Surveillance Engine Project Config
+version: 1.0.0
+schema: v1
+
+models:
+  - name: Qwen3 Coder 480B (NVIDIA)
+    provider: openai
+    model: qwen/qwen3-coder-480b-a35b-instruct
+    apiBase: https://integrate.api.nvidia.com/v1
+    apiKey: ${{ secrets.NVIDIA_API_KEY }}
+    roles:
+      - chat
+      - edit
+      - apply
+    capabilities:
+      - tool_use
+    defaultCompletionOptions:
+      temperature: 0.2
+      maxTokens: 4096
+    requestOptions:
+      timeout: 120000
+
+  - name: DeepSeek V4 Pro (NVIDIA)
+    provider: openai
+    model: deepseek-ai/deepseek-v4-pro
+    apiBase: https://integrate.api.nvidia.com/v1
+    apiKey: ${{ secrets.NVIDIA_API_KEY }}
+    roles:
+      - chat
+      - edit
+      - apply
+    capabilities:
+      - tool_use
+    defaultCompletionOptions:
+      temperature: 1
+      topP: 0.95
+      maxTokens: 16384
+    requestOptions:
+      timeout: 120000
+
+context:
+  - provider: currentFile
+  - provider: file
+  - provider: code
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: tree
+  - provider: repo-map
+    params:
+      includeSignatures: true
+  - provider: search
+    params:
+      maxResults: 100
+
+rules:
+  - Act as an experienced AI/ML engineer and computer-vision expert with 20+ years of experience, delivering production-grade system planning, architecture design, implementation, testing, and debugging at maximum capability.
+  - For DeepSeek tasks, do deep software and system planning, challenge your own reasoning, and iteratively refine the best solution before implementation.
+  - Use an automatic debugging workflow: reproduce, isolate root cause, validate fix, and confirm no regressions.
+  - Add or update tests for behavior changes and bug fixes, including happy path, edge cases, and error paths.
+  - Protect secrets at all times; never hardcode or log API keys, tokens, or passwords.
